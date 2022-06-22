@@ -1,0 +1,37 @@
+<div>
+    <div class="card">
+        <div class="card-header">
+            <h2>
+                {{post.title}}
+            </h2>
+            <div>
+                posted by {{post.User.username}} on {{format_date post.createdAt}}
+            </div>
+        </div>
+        <div class="card-body">{{post.body}}</div>
+    </div>
+    {{#if post.Comments}}
+    <h3>Comments</h3>
+    {{#each post.Comments as |comment|}}
+    {{comment.body}}
+    {{/each}}
+    {{/if}}
+    <div>
+        <form class="comment-form">
+            <div>
+                <label for="comment">comment:</label>
+                <textarea value="post-id" name="comment-body" rows="2" id="comment"></textarea>
+            </div>
+            <div>
+                <button id="comment-btn" type="submit">add comment</button>
+            </div>
+        
+        </form>
+
+    </div>
+
+</div>
+<script src="./js/comment.js"></script>
+
+
+{{!-- inside the each {{body}} username and the createAt (follow the each post to figure it out--}}

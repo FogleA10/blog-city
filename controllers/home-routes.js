@@ -1,17 +1,36 @@
 const router = require('express').Router();
 const { Post, Comment, User } = require('../models/');
+const { findAll } = require('../models/User');
 
 // get all posts for homepage
 router.get('/', async (req, res) => {
   try {
     // we need to get all Posts and include the User for each (change lines 8 and 9)
-    const postData = await SomeModel.someSequelizeMethod({
-      include: [SomeOtherModel],
+    const postData = await Post.findAll({
+      attributes: [
+        'id',
+        'title',
+        'content',
+        'createdAt'
+    ],
+      include: [{
+        model: Comment,
+        attributes: ['id', 'comment_text', 'postId', 'user_id', 'createdAt'],
+        include: {
+            model: User,
+            attributes: ['username']
+        }
+    },
+    {
+        model: User,
+        attributes: ['username']
+    }
+]
     });
     // serialize the data
     const posts = postData.map((post) => post.get({ plain: true }));
     // we should render all the posts here
-    res.render('hmmmm what view should we render?', { posts });
+    res.render('all-posts', { posts, loggedIn:req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -36,7 +55,7 @@ router.get('/post/:id', async (req, res) => {
       // serialize the data
       const post = postData.get({ plain: true });
       // which view should we render for a single-post?
-      res.render('hmmmm what view should we render?', { post });
+      res.render('single-post', { post, loggedIn:req.session.loggedIn });
     } else {
       res.status(404).end();
     }
@@ -63,5 +82,7 @@ router.get('/signup', (req, res) => {
 
   res.render('signup');
 });
+
+//
 
 module.exports = router;
