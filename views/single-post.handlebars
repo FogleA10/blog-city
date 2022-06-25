@@ -22,6 +22,8 @@
                 <label for="comment">comment:</label>
                 <textarea value="post-id" name="comment-body" rows="2" id="comment"></textarea>
             </div>
+            <div class="card-body" data-post-id="{{post.postId}}">{{post.body}}
+            </div>
             <div>
                 <button id="comment-btn" type="submit">add comment</button>
             </div>

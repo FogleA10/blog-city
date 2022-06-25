@@ -1,7 +1,8 @@
-const commentFormHandler = async function(event) {
+const commentFormHandler = async function (event) {
   event.preventDefault();
 
-  const postId = document.querySelector('input[name="post-id"]').value;
+  const postId = document.querySelector('.card-body').dataset.postId;
+  // const postId = document.querySelector('input[name="post-id"]').value;
   const body = document.querySelector('textarea[name="comment-body"]').value;
 
   if (body) {
