@@ -77,6 +77,7 @@ Post.init(
           key: 'id'
         }
       }
+      
     },
     {
       sequelize,

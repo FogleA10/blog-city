@@ -9,9 +9,11 @@ const loginFormHandler = async function(event) {
     body: JSON.stringify({
       username: usernameEl.value,
       password: passwordEl.value,
+      
     }),
     headers: { 'Content-Type': 'application/json' },
   });
+console.log("response",response);
 
   if (response.ok) {
     document.location.replace('/dashboard');
@@ -20,6 +22,8 @@ const loginFormHandler = async function(event) {
   }
 };
 
-document
-  .querySelector('#login-form')
-  .addEventListener('submit', loginFormHandler);
+// document
+//   .querySelector('#login-form')
+//   .addEventListener('submit', loginFormHandler);
+
+document.querySelector('#login-form').addEventListener('submit', loginFormHandler);
