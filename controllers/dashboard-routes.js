@@ -2,9 +2,14 @@ const router = require('express').Router();
 const { Post } = require('../models/');
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   console.log('logout');
   try {
+    const postData = await Post.findAll({
+      where:{
+        userId: req.session.userId
+      }
+    })
     // store the results of the db query in a variable called postData. should use something that "finds all" from the Post model. may need a where clause!
 
     // this sanitizes the data we just got from the db above (you have to create the above)
@@ -24,7 +29,7 @@ router.get('/', async (req, res) => {
 
 router.get('/new', withAuth, (req, res) => {
   // what view should we send the client when they want to create a new-post? (change this next line)
-  res.render('hmmmm what goes here', {
+  res.render('new-post', {
     // again, rendering with a different layout than main! no change needed
     layout: 'dashboard',
   });
