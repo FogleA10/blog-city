@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  console.log('req.body',req.body);
+ // console.log('req.body',req.body);
   try {
     const user = await User.findOne({
       where: {
@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
       req.session.username = user.username;
       req.session.loggedIn = true;
 
-      res.json({ user, message: 'You are now logged in!' });
+      res.json({ user,loggedIn:req.session.loggedIn, message: 'You are now logged in!' });
     });
   } catch (err) {
     res.status(400).json({ message: 'No user account found!' });

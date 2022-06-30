@@ -4,9 +4,9 @@ const editFormHandler = async function(event) {
   event.preventDefault();
 
   const title = document.querySelector('input[name="post-title"]').value;
-  const body = document.querySelector('textarea[name="post-body"]').value;
+  const body = document.querySelector('input[name="content"]').value;
 
-  await fetch(`/api/post/${postId}`, {
+  const response = await fetch(`/api/post/${postId}`, {
     method: 'PUT',
     body: JSON.stringify({
       title,
@@ -15,7 +15,8 @@ const editFormHandler = async function(event) {
     headers: {
       'Content-Type': 'application/json'
     }
-  });
+  }); 
+  console.log(response);
 
   document.location.replace('/dashboard');
 };
