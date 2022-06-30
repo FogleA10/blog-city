@@ -7,6 +7,7 @@ Your challenge this week is to build a CMS-style blog site similar to a Wordpres
 
 ## Deployed Link
 [deployed site](https://github.com/FogleA10/blog-city)
+
 ## User Story
 
 ```md
